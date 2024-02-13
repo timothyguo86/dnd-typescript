@@ -1,0 +1,16 @@
+{
+  "name": "dnd-typescript",
+  "version": "1.0.0",
+  "description": "A drag and drop component created with TypeScript.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "drag and drop",
+    "dnd",
+    "typescript"
+  ],
+  "author": "Timothy Guo",
+  "license": "MIT"
+}

@@ -1,0 +1,8 @@
+# dependancies
+node_modules/
+
+# production
+dist/
+
+# misc
+tsconfig.json

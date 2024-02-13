@@ -1,0 +1,23 @@
+# Tell the EditorConfig plugin that this is the root file and there's no need to continue searching upwards
+root = true
+
+# Match all files
+[*]
+
+# Set character encoding to UTF-8
+charset = utf-8
+
+# Indentation style, choose between "space" and "tab"
+indent_style = tab
+
+# Number of spaces or tabs for indentation
+indent_size = 2
+
+# Line ending style, choose between "lf" (Unix), "cr" (Mac), or "crlf" (Windows)
+end_of_line = lf
+
+# Insert a newline at the end of the file
+insert_final_newline = true
+
+# Trim trailing whitespace at the end of lines
+trim_trailing_whitespace = true
