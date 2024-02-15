@@ -38,6 +38,56 @@ function validateInput(validatableInput: Validatable): boolean {
 }
 
 /**
+ * ProjectList class represents a component for managing and rendering project lists.
+ * It includes methods for initializing the component, rendering list content, and attaching the list to the DOM.
+ */
+class ProjectList {
+  // Reference to the HTML template element for rendering the project list
+  private readonly templateElement: HTMLTemplateElement
+  // Reference to the host element where the list will be attached
+  private readonly hostElement: HTMLDivElement
+  // Reference to the list element itself
+  private readonly listElement: HTMLElement
+
+  /**
+   * Constructor initializes the class by fetching necessary elements from the DOM,
+   * cloning the template, setting up event listeners, and rendering list content.
+   * @param type - Specifies whether the list is for active or finished projects.
+   */
+  constructor(private type: 'active' | 'finished') {
+    // Fetch the template element from the DOM
+    this.templateElement = document.querySelector<HTMLTemplateElement>('#project-list')!
+    // Fetch the host element where the list will be attached
+    this.hostElement = document.querySelector<HTMLDivElement>('#app')!
+    // Clone the template content, assign it to the list element, and set its ID
+    const importedNode = document.importNode(this.templateElement.content, true)
+    this.listElement = importedNode.firstElementChild as HTMLElement
+    this.listElement.id = `${this.type}-projects`
+    // Attach the list to the DOM and render its content
+    this.attachList()
+    this.renderContent()
+  }
+
+  /**
+   * Private method to dynamically render content within the list based on the project type.
+   */
+  private renderContent() {
+    // Set the ID of the list inside the list element
+    const listId = `${this.type}-project-list`
+    this.listElement.querySelector('ul')!.id = listId
+    // Set the title of the list based on the project type
+    this.listElement.querySelector('h2')!.textContent = this.type.toUpperCase() + ' PROJECTS'
+  }
+
+  /**
+   * Private method to attach the list element to the host element in the DOM.
+   */
+  private attachList() {
+    this.hostElement.insertAdjacentElement('beforeend', this.listElement)
+  }
+}
+
+/**
  * ProjectInput class manages the creation and behavior of a project input form.
  * It provides methods to fetch user input, validate it, and handle form submission.
  */
@@ -146,8 +196,8 @@ class ProjectInput {
     if (Array.isArray(userInput)) {
       const [title, description, people] = userInput
       console.log(title, description, people)
+      this.clearForm()
     }
-    this.clearForm()
   }
 
   /**
@@ -167,3 +217,5 @@ class ProjectInput {
 
 // Create an instance of ProjectInput when the script loads
 const projInput = new ProjectInput()
+const activeProjectList = new ProjectList('active')
+const finishedProjectList = new ProjectList('finished')
