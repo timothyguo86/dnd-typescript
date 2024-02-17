@@ -13,14 +13,23 @@ class Project {
   ) {}
 }
 
-type Listener = (items: Project[]) => void
+type Listener<T> = (items: T[]) => void
 
-class ProjectState {
-  private listeners: Listener[] = []
+class State<T> {
+  protected listeners: Listener<T>[] = []
+
+  addListener(listenerFn: Listener<T>) {
+    this.listeners.push(listenerFn)
+  }
+}
+
+class ProjectState extends State<Project> {
   private projects: Project[] = []
   private static state: ProjectState
 
-  constructor() {}
+  private constructor() {
+    super()
+  }
 
   static getState() {
     if (this.state) {
@@ -28,10 +37,6 @@ class ProjectState {
     }
     this.state = new ProjectState()
     return this.state
-  }
-
-  addListener(listenerFn: Listener) {
-    this.listeners.push(listenerFn)
   }
 
   addProject(title: string, description: string, people: number) {
@@ -83,8 +88,8 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   readonly element: U
 
   constructor(templateId: string, hostElementId: string, insertAtStart: boolean, newElementId?: string) {
-    this.templateElement = document.querySelector(templateId)! as HTMLTemplateElement
-    this.hostElement = document.querySelector(hostElementId)! as T
+    this.templateElement = document.getElementById(templateId)! as HTMLTemplateElement
+    this.hostElement = document.getElementById(hostElementId)! as T
 
     const importedNode = document.importNode(this.templateElement.content, true)
     this.element = importedNode.firstElementChild as U
@@ -108,7 +113,7 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
   private assignedProjects: Project[]
 
   constructor(private type: 'active' | 'finished') {
-    super('#project-list', '#app', false, `${type}-projects`)
+    super('project-list', 'app', false, `${type}-projects`)
     this.assignedProjects = []
 
     this.configure()
@@ -152,7 +157,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   public peopleInputElement: HTMLInputElement
 
   constructor() {
-    super('#project-input', '#app', true, 'user-input')
+    super('project-input', 'app', true, 'user-input')
     this.titleInputElement = this.getElement('#title') as HTMLInputElement
     this.descriptionElement = this.getElement('#description') as HTMLTextAreaElement
     this.peopleInputElement = this.getElement('#people') as HTMLInputElement
