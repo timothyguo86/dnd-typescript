@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { Project, ProjectStatus } from '../models/project.js'
 
 type Listener<T> = (items: T[]) => void
@@ -27,7 +28,7 @@ export class ProjectState extends State<Project> {
   }
 
   addProject(title: string, description: string, people: number) {
-    const newProject = new Project(Math.random().toString(), title, description, people, ProjectStatus.Active)
+    const newProject = new Project(uuidv4(), title, description, people, ProjectStatus.Active)
 
     this.projects.push(newProject)
     this.updateListeners()
