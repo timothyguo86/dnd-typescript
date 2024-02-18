@@ -1,3 +1,6 @@
+/**
+ * Represents an object used for validation.
+ */
 export interface Validatable {
   value: string | number
   required?: boolean
@@ -7,6 +10,11 @@ export interface Validatable {
   max?: number
 }
 
+/**
+ * Validates the input based on the provided rules.
+ * @param {Validatable} validatableInput - The input to validate.
+ * @returns {boolean} - True if the input is valid, false otherwise.
+ */
 export function validateInput(validatableInput: Validatable): boolean {
   let isValid = true
 

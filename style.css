@@ -1,15 +1,21 @@
+/**
+ * Applies box-sizing border-box to all elements for consistent sizing.
+ */
 * {
   box-sizing: border-box;
 }
 
+/* Sets default font family for the document */
 html {
   font-family: sans-serif;
 }
 
+/* Resets margin for the body element */
 body {
   margin: 0;
 }
 
+/* Styles for labels, inputs, and textareas */
 label,
 input,
 textarea {
@@ -17,10 +23,12 @@ textarea {
   margin: 0.5rem 0;
 }
 
+/* Styles for labels */
 label {
   font-weight: bold;
 }
 
+/* Styles for inputs and textareas */
 input,
 textarea {
   font: inherit;
@@ -30,12 +38,14 @@ textarea {
   border: 1px solid #ccc;
 }
 
+/* Styles for focus state of inputs and textareas */
 input:focus,
 textarea:focus {
   outline: none;
   background: #fff5f9;
 }
 
+/* Styles for buttons */
 button {
   font: inherit;
   background: #ff0062;
@@ -45,21 +55,25 @@ button {
   padding: 0.75rem 1rem;
 }
 
+/* Styles for focus state of buttons */
 button:focus {
   outline: none;
 }
 
+/* Styles for hover and active states of buttons */
 button:hover,
 button:active {
   background: #a80041;
   border-color: #a80041;
 }
 
+/* Styles for the projects section */
 .projects {
   margin: 1rem;
   border: 1px solid #ff0062;
 }
 
+/* Styles for the header of the projects section */
 .projects header {
   background: #ff0062;
   height: 3.5rem;
@@ -68,25 +82,30 @@ button:active {
   align-items: center;
 }
 
+/* Styles for the finished projects section */
 #finished-projects {
   border-color: #0044ff;
 }
 
+/* Styles for the header of the finished projects section */
 #finished-projects header {
   background: #0044ff;
 }
 
+/* Styles for the title of the projects section */
 .projects h2 {
   margin: 0;
   color: white;
 }
 
+/* Styles for the list inside the projects section */
 .projects ul {
   list-style: none;
   margin: 0;
   padding: 1rem;
 }
 
+/* Styles for individual project items */
 .projects li {
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
@@ -94,32 +113,39 @@ button:active {
   background: #fff;
 }
 
+/* Styles for the title of individual project items */
 .projects li h2 {
   color: #ff0062;
   margin: 0.5rem 0;
 }
 
+/* Styles for the title of finished project items */
 #finished-projects li h2 {
   color: #0044ff;
 }
 
+/* Styles for the subtitle of individual project items */
 .projects li h3 {
   color: #575757;
   font-size: 1rem;
 }
 
+/* Styles for paragraphs inside individual project items */
 .project li p {
   margin: 0;
 }
 
+/* Styles for the droppable area */
 .droppable {
   background: #ffe3ee;
 }
 
+/* Styles for the droppable area inside finished projects */
 #finished-projects .droppable {
   background: #d6e1ff;
 }
 
+/* Styles for the user input section */
 #user-input {
   margin: 1rem;
   padding: 1rem;

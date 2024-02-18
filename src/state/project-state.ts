@@ -1,16 +1,20 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Project, ProjectStatus } from '../models/project'
 
+// Represents a function type for listeners
 type Listener<T> = (items: T[]) => void
 
+// Represents the state class
 class State<T> {
   protected listeners: Listener<T>[] = []
 
+  // Adds a listener function to the list of listeners
   addListener(listenerFn: Listener<T>) {
     this.listeners.push(listenerFn)
   }
 }
 
+// Represents the state of projects
 export class ProjectState extends State<Project> {
   private projects: Project[] = []
   private static state: ProjectState
@@ -19,6 +23,7 @@ export class ProjectState extends State<Project> {
     super()
   }
 
+  // Retrieves the singleton instance of ProjectState
   static getState() {
     if (this.state) {
       return this.state
@@ -27,6 +32,7 @@ export class ProjectState extends State<Project> {
     return this.state
   }
 
+  // Adds a new project
   addProject(title: string, description: string, people: number) {
     const newProject = new Project(uuidv4(), title, description, people, ProjectStatus.Active)
 
@@ -34,6 +40,7 @@ export class ProjectState extends State<Project> {
     this.updateListeners()
   }
 
+  // Moves a project to a new status
   moveProject(projectId: string, newStatus: ProjectStatus) {
     const project = this.projects.find((project) => project.id === projectId)
     if (project && project.status !== newStatus) {
@@ -42,6 +49,7 @@ export class ProjectState extends State<Project> {
     }
   }
 
+  // Notifies all listeners about the update
   private updateListeners() {
     for (const listenerFn of this.listeners) {
       listenerFn([...this.projects])
@@ -49,4 +57,5 @@ export class ProjectState extends State<Project> {
   }
 }
 
+// Creates a singleton instance of ProjectState
 export const projectState = ProjectState.getState()
