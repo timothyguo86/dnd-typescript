@@ -8,7 +8,7 @@ To use this project, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/timothyguo86/dnd-typescript.git
    ```
 2. Install dependencies:
    ```sh
